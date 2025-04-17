@@ -36,3 +36,7 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+petrichor-frontend/*
+!petrichor-frontend/src/
+!petrichor-frontend/src/**
