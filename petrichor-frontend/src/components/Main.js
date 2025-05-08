@@ -1,26 +1,10 @@
 import React from "react";
 import "../css/Main.css";
-import logo from "../svg.svg";
 
-const HomePage = () => {
+const Main = () => {
   return (
     <div className="homepage-container">
-      <header className="header">
-        <div className="branding">
-          <img src={logo} alt="Petrichor Logo" className="logo" />
-          <h1>АО «Petrichor»</h1>
-        </div>
-        <p className="tagline">Надёжный поставщик угля по всей России и СНГ</p>
-      </header>
-
-      <nav className="nav">
-        <a href="/">Главная</a>
-        <a href="/products">Продукция</a>
-        <a href="/about">О компании</a>
-        <a href="/contact">Контакты</a>
-      </nav>
-
-      <main className="main-content">
+            <main className="main-content">
         <section className="about">
           <h2>О компании</h2>
           <p>
@@ -48,11 +32,11 @@ const HomePage = () => {
         </section>
       </main>
 
-      <footer className="footer">
+      {/* <footer className="footer">
         <p>© 2025 АО «Petrichor». Все права защищены.</p>
-      </footer>
+      </footer> */}
     </div>
   );
 };
 
-export default HomePage;
+export default Main;
