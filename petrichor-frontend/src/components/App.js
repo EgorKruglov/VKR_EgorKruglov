@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import '../css/App.css';
 import logo from "../svg.svg";
-import Main from './Main'; // импортируем компонент Main
+import Main from './Main';
+import Company from './Company';
+import Contacts from './Contacts';
+import Products from './Products';
+import UserLogin from './UserLogin';
+import UserRegistration from './UserRegistration';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 function Header() {
@@ -16,14 +21,14 @@ function Header() {
   );
 }
 
-function Nav() {
+function Nav({ onLoginClick }) {
   return (
     <nav className="nav">
       <Link to="/">Главная</Link>
       <Link to="/about">О компании</Link>
       <Link to="/products">Продукция</Link>
-      <Link to="/contact">Контакты</Link>
-      <Link to="/login">Авторизоваться</Link>
+      <Link to="/contacts">Контакты</Link>
+      <button className="nav-link" onClick={onLoginClick}>Авторизоваться</button>
     </nav>
   );
 }
@@ -37,19 +42,22 @@ function Footer() {
 }
 
 export default function App() {
+  const [isLoginOpen, setLoginOpen] = useState(false);
+
   return (
     <div className="app">
       <Router>
         <Header />
-        <Nav />
+        <Nav onLoginClick={() => setLoginOpen(true)} />
         <Routes>
           <Route path="/" element={<Main />} />
-          {/* <Route path="/company" element={<Company />} />
+          <Route path="/company" element={<Company />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/login" element={<login />} /> */}
+          <Route path="/registration" element={<UserRegistration />} />
         </Routes>
         <Footer />
+        <UserLogin isOpen={isLoginOpen} onClose={() => setLoginOpen(false)} />
       </Router>
     </div>
   );
