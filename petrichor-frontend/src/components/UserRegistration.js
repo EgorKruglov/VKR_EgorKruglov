@@ -5,8 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const UserRegistration = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        // Личные данные
-        fullName: '',
+        // Данные для регистрации
         email: '',
         phone: '',
         password: '',
@@ -40,6 +39,9 @@ const UserRegistration = () => {
         agreeToTerms: false,
     });
 
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
+
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
         setFormData(prev => ({
@@ -48,8 +50,10 @@ const UserRegistration = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Валидация
         if (formData.password !== formData.confirmPassword) {
             alert('Пароли не совпадают!');
             return;
@@ -58,8 +62,36 @@ const UserRegistration = () => {
             alert('Необходимо согласие на обработку персональных данных');
             return;
         }
-        console.log('Registration data:', formData);
-        alert('Регистрация успешно отправлена на проверку');
+
+        // Подготовка данных для отправки (исключаем confirmPassword)
+        const { confirmPassword, agreeToTerms, ...registrationData } = formData;
+
+        try {
+            setIsLoading(true);
+            setError('');
+
+            const response = await fetch('http://localhost:8080/users/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(registrationData),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Ошибка регистрации');
+            }
+
+            const data = await response.json();
+            alert('Регистрация успешно завершена!');
+            navigate('/'); // Перенаправляем на главную страницу
+        } catch (err) {
+            setError(err.message || 'Произошла ошибка при регистрации');
+            console.error('Registration error:', err);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const handleCancelClick = () => {
@@ -69,22 +101,11 @@ const UserRegistration = () => {
     return (
         <div className="registration-container">
             <section className="registration-section">
+                {error && <div className="error-message">{error}</div>}
                 <h2>Регистрация покупателя</h2>
                 <form onSubmit={handleSubmit}>
                     {/* Личные данные */}
-                    <h3>Личные данные</h3>
-                    <div className="form-group">
-                        <label htmlFor="fullName">ФИО:</label>
-                        <input
-                            type="text"
-                            id="fullName"
-                            name="fullName"
-                            value={formData.fullName}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-
+                    <h3>Данные для регистрации</h3>
                     <div className="form-group">
                         <label htmlFor="email">Электронная почта:</label>
                         <input
@@ -178,6 +199,7 @@ const UserRegistration = () => {
                             name="kpp"
                             value={formData.kpp}
                             onChange={handleChange}
+                            required
                         />
                     </div>
 
@@ -288,7 +310,6 @@ const UserRegistration = () => {
                             name="contactPersonPosition"
                             value={formData.contactPersonPosition}
                             onChange={handleChange}
-                            required
                         />
                     </div>
 
@@ -343,8 +364,20 @@ const UserRegistration = () => {
                     </div>
 
                     <div className="form-actions">
-                        <button type="submit" className="submit-btn">Зарегистрироваться</button>
-                        <button type="button" onClick={handleCancelClick} className="cancel-btn">Отмена</button>
+                        <button
+                            type="submit"
+                            className="submit-btn"
+                            disabled={isLoading}
+                        >
+                            {isLoading ? 'Отправка...' : 'Зарегистрироваться'}
+                        </button>
+                        <button
+                            type="button"
+                            onClick={handleCancelClick}
+                            className="cancel-btn"
+                        >
+                            Отмена
+                        </button>
                     </div>
                 </form>
             </section>
