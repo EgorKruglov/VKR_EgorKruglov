@@ -66,8 +66,8 @@ export default function LoginPopup({ isOpen, onClose, onLoginSuccess }) {
         if (!formData.password) {
             newErrors.password = 'Пароль обязателен для заполнения';
             isValid = false;
-        } else if (formData.password.length < 6) {
-            newErrors.password = 'Пароль должен содержать минимум 6 символов';
+        } else if (formData.password.length < 9) {
+            newErrors.password = 'Пароль должен содержать минимум 8 символов';
             isValid = false;
         }
 
@@ -85,15 +85,15 @@ export default function LoginPopup({ isOpen, onClose, onLoginSuccess }) {
 
         try {
             const response = await axios.post('http://localhost:8080/users/auth/login', formData);
-            // console.log(response.data);
-            const { token, user } = response.data;
+            console.log(response.data);
+            const { token, email } = response.data;
             localStorage.setItem('authToken', token);
-            onLoginSuccess(user);
+            //onLoginSuccess(user);
             onClose();
         } catch (err) {
             setErrors(prev => ({
                 ...prev,
-                form: err.response?.data?.message || 'Ошибка авторизации'
+                form: err.response?.data?.error || 'Ошибка авторизации'
             }));
             console.error('Login error:', err);
         }

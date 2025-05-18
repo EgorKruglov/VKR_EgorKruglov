@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class DataInitializer {
-    private final UserRepository userRepository;
+    /*private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
     @PostConstruct
@@ -24,5 +24,5 @@ public class DataInitializer {
             userRepository.save(user);
             log.info("БАЗОВАЯ ИНИЦИАЛИЗАЦИЯ УСПЕШНА");
         }
-    }
+    }*/
 }

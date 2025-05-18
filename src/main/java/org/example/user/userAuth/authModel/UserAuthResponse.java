@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.user.model.UserDto;
+
 
 @Data
 @Builder
@@ -13,4 +13,5 @@ import org.example.user.model.UserDto;
 public class UserAuthResponse {
 
     private String token;
+    private String email;
 }

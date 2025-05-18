@@ -1,7 +1,6 @@
 package org.example.user.userAuth;
 
 import lombok.RequiredArgsConstructor;
-import org.example.user.model.UserDto;
 import org.example.user.userAuth.authModel.UserAuthRequest;
 import org.example.user.userAuth.authModel.UserAuthResponse;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,7 +31,8 @@ public class AuthService {
         User user = (User) authentication.getPrincipal();
 
         return new UserAuthResponse(
-                jwtToken
+                jwtToken,
+                user.getUsername()  // Я пока не понимаю, норм ли, что я отправляю почту? Можно ли её вместо id использовать? Мне кажется это вообще норм абсолютно.
         );
     }
 }
