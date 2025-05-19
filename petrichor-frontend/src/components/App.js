@@ -7,6 +7,9 @@ import Contacts from './Contacts';
 import Products from './Products';
 import UserLogin from './UserLogin';
 import UserRegistration from './UserRegistration';
+import Orders from './Orders';
+import Profile from './Profile';
+import Notification from './Notification';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 function Header() {
@@ -21,14 +24,21 @@ function Header() {
   );
 }
 
-function Nav({ onLoginClick }) {
+function Nav({ onLoginClick, isAuthenticated }) {
   return (
     <nav className="nav">
       <Link to="/">Главная</Link>
       <Link to="/about">О компании</Link>
       <Link to="/products">Продукция</Link>
       <Link to="/contacts">Контакты</Link>
-      <button className="nav-link" onClick={onLoginClick}>Авторизоваться</button>
+      {isAuthenticated ? (
+        <>
+          <Link to="/orders" className="nav-link">Мои заказы</Link>
+          <Link to="/profile" className="nav-link">Профиль</Link>
+        </>
+      ) : (
+        <button className="nav-link" onClick={onLoginClick}>Авторизоваться</button>
+      )}
     </nav>
   );
 }
@@ -43,21 +53,60 @@ function Footer() {
 
 export default function App() {
   const [isLoginOpen, setLoginOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [notification, setNotification] = useState(null);
+
+  // Проверяем авторизацию при загрузке
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    setIsAuthenticated(!!token);
+  }, []);
+
+  const handleLoginSuccess = () => {
+    setIsAuthenticated(true);
+    setNotification('Добро пожаловать!');
+    setTimeout(() => setNotification(null), 3000);
+  };
+
+  // Функция для обработки выхода
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    setIsAuthenticated(false);
+  };
 
   return (
     <div className="app">
       <Router>
         <Header />
-        <Nav onLoginClick={() => setLoginOpen(true)} />
+        <Nav 
+          onLoginClick={() => setLoginOpen(true)} 
+          isAuthenticated={isAuthenticated} 
+        />
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/company" element={<Company />} />
+          <Route path="/about" element={<Company />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/products" element={<Products />} />
           <Route path="/registration" element={<UserRegistration />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route 
+            path="/profile" 
+            element={<Profile onLogout={handleLogout} />} 
+          />
         </Routes>
         <Footer />
-        <UserLogin isOpen={isLoginOpen} onClose={() => setLoginOpen(false)} />
+        <UserLogin 
+          isOpen={isLoginOpen} 
+          onClose={() => setLoginOpen(false)} 
+          onLoginSuccess={handleLoginSuccess}
+        />
+        {/* Отображаем уведомление, если оно есть */}
+        {notification && (
+          <Notification 
+            message={notification} 
+            onClose={() => setNotification(null)} 
+          />
+        )}
       </Router>
     </div>
   );

@@ -88,7 +88,8 @@ export default function LoginPopup({ isOpen, onClose, onLoginSuccess }) {
             console.log(response.data);
             const { token, email } = response.data;
             localStorage.setItem('authToken', token);
-            //onLoginSuccess(user);
+            localStorage.setItem('email', email)
+            onLoginSuccess();
             onClose();
         } catch (err) {
             setErrors(prev => ({
