@@ -10,6 +10,10 @@ import UserRegistration from './UserRegistration';
 import Orders from './Orders';
 import Profile from './Profile';
 import Notification from './Notification';
+import NewOrder from './NewOrder';
+// import MaybeNewMain from './MaybeNewMain';
+// import MaybeNewMain2 from './MaybeNewMain2';
+
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 function Header() {
@@ -89,6 +93,7 @@ export default function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/registration" element={<UserRegistration />} />
           <Route path="/orders" element={<Orders />} />
+          <Route path="/new-order" element={<NewOrder />} />
           <Route 
             path="/profile" 
             element={<Profile onLogout={handleLogout} />} 

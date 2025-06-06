@@ -1,3 +1,6 @@
+-- Тут сейчас старая таблица пользователей не согласована с новыми таблицами
+-- Потом пока не понятно, делать ли роли юзер/админ для приложения
+
 ;
 --DROP ALL OBJECTS;
 --
@@ -44,3 +47,91 @@
 --    PRIMARY KEY (user_id, role),
 --    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 --);
+--
+---- Создание таблицы марок угля
+--CREATE TABLE coal_grades (
+--    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+--    name VARCHAR(255) NOT NULL UNIQUE,
+--    description VARCHAR(255),
+--    typical_calorific_value DOUBLE,
+--    typical_ash_content DOUBLE
+--);
+--
+---- Создание таблицы заказов
+--CREATE TABLE orders (
+--    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+--    user_id BIGINT NOT NULL,
+--    coal_grade_id BIGINT NOT NULL,
+--    quantity DOUBLE,
+--    price_per_ton DECIMAL(19, 2),
+--    incoterm VARCHAR(10) CHECK (incoterm IN ('EXW', 'FCA', 'FOB', 'CIF', 'DAP')),
+--    delivery_address VARCHAR(255),
+--    desired_delivery_date DATE,
+--    status VARCHAR(20) CHECK (status IN ('CREATED', 'PROCESSING', 'CONFIRMED', 'SHIPPED', 'DELIVERED', 'CANCELLED')),
+--    created_at TIMESTAMP,
+--    updated_at TIMESTAMP,
+--    FOREIGN KEY (user_id) REFERENCES users(id),
+--    FOREIGN KEY (coal_grade_id) REFERENCES coal_grades(id)
+--);
+--
+---- Создание индексов для ускорения поиска
+--CREATE INDEX idx_orders_user_id ON orders(user_id);
+--CREATE INDEX idx_orders_coal_grade_id ON orders(coal_grade_id);
+--CREATE INDEX idx_orders_status ON orders(status);
+--
+--
+--
+---- Вставка тестовых марок угля
+--INSERT INTO coal_grades (name, description, typical_calorific_value, typical_ash_content) VALUES
+--('Д', 'Длиннопламенный', 5200, 8.5),
+--('ДГ', 'Длиннопламенный газовый', 5100, 9.0),
+--('Г', 'Газовый', 5400, 7.5),
+--('Ж', 'Жирный', 5800, 6.0),
+--('К', 'Коксовый', 6000, 5.5),
+--('ОС', 'Отощенный спекающийся', 5500, 7.0),
+--('Т', 'Тощий', 4900, 10.0),
+--('СС', 'Слабоспекающийся', 5300, 8.0),
+--('А', 'Антрацит', 6200, 4.5);
+
+
+
+
+
+---- Вставка тестовых пользователей
+--INSERT INTO users (contact_person_position, password, company_name, contact_person, phone, email) VALUES
+--('user1', '$2a$10$xJwL5v5Jz5U5Z5b5Z5b5Zu5Z5b5Z5b5Z5b5Z5b5Z5b5Z5b5Z5b5Z', 'Угольная Компания Админ', 'Иван Юзеров', '+79990000001', 'user@coal.ru'),
+--('buyer1', '$2a$10$xJwL5v5Jz5U5Z5b5Z5b5Zu5Z5b5Z5b5Z5b5Z5b5Z5b5Z5b5Z5b5Z', 'Металлургический Завод', 'Петр Покупателев', '+79990000002', 'buyer1@metal.ru'),
+--('buyer2', '$2a$10$xJwL5v5Jz5U5Z5b5Z5b5Zu5Z5b5Z5b5Z5b5Z5b5Z5b5Z5b5Z5b5Z', 'Энергетическая Компания', 'Сидор Энергетиков', '+79990000003', 'buyer2@energy.ru'),
+--('supplier1', '$2a$10$xJwL5v5Jz5U5Z5b5Z5b5Zu5Z5b5Z5b5Z5b5Z5b5Z5b5Z5b5Z5b5Z', 'Шахта Угольная', 'Николай Поставщиков', '+79990000004', 'supplier1@coal.ru'),
+--('supplier2', '$2a$10$xJwL5v5Jz5U5Z5b5Z5b5Zu5Z5b5Z5b5Z5b5Z5b5Z5b5Z5b5Z5b5Z', 'Разрез Сибирский', 'Ольга Угольная', '+79990000005', 'supplier2@coal.ru');
+--
+---- Назначение ролей пользователям
+--INSERT INTO user_roles (user_id, role) VALUES
+--(1, 'ADMIN'),
+--(1, 'USER'),
+--(2, 'MANAGER'),
+--(2, 'USER'),
+--(3, 'USER'),
+--(4, 'USER'),
+--(5, 'PARTNER'),
+--(5, 'USER');
+--
+---- Вставка тестовых заказов
+--INSERT INTO orders (user_id, coal_grade_id, quantity, price_per_ton, incoterm, delivery_address, desired_delivery_date, status, created_at, updated_at) VALUES
+--(1, 1, 1000, 3500.00, 'FCA', 'г. Москва, ул. Металлургов, 1', '2023-12-15', 'CONFIRMED', '2023-11-01 10:00:00', '2023-11-01 10:00:00'),
+--(1, 3, 500, 4200.00, 'FOB', 'г. Санкт-Петербург, порт', '2023-12-20', 'SHIPPED', '2023-11-05 11:30:00', '2023-11-10 09:15:00'),
+--(2, 5, 2000, 5800.00, 'CIF', 'г. Владивосток, порт', '2024-01-10', 'PROCESSING', '2023-11-10 14:20:00', '2023-11-10 14:20:00'),
+--(2, 7, 800, 3200.00, 'DAP', 'г. Екатеринбург, ул. Энергетиков, 5', '2023-12-05', 'DELIVERED', '2023-10-25 09:00:00', '2023-11-30 16:45:00'),
+--(2, 9, 1500, 6500.00, 'EXW', 'г. Новосибирск, шахта', '2024-02-01', 'CREATED', '2023-11-15 16:40:00', '2023-11-15 16:40:00'),
+--(3, 2, 1200, 3800.00, 'FCA', 'г. Казань, ТЭЦ-1', '2023-12-25', 'CONFIRMED', '2023-11-12 13:10:00', '2023-11-12 13:10:00');
+
+
+
+
+---- Вставка тестовых пользователей
+--INSERT INTO users (contact_person_position, password, company_name, contact_person, phone, email, role) VALUES
+--('admin', '$2a$10$xJwL5v5Jz5U6Z5b5Z5b5ZeXJwL5v5Jz5U6Z5b5Z5b5Ze', 'Угольная Компания Админ', 'Иван Админов', '+79990000001', 'admin@coal.ru', 'ADMIN'),
+--('buyer1', '$2a$10$xJwL5v5Jz5U6Z5b5Z5b5ZeXJwL5v5Jz5U6Z5b5Z5b5Ze', 'Металлургический Завод', 'Петр Покупателев', '+79990000002', 'buyer1@metal.ru', 'BUYER'),
+--('buyer2', '$2a$10$xJwL5v5Jz5U6Z5b5Z5b5ZeXJwL5v5Jz5U6Z5b5Z5b5Ze', 'Энергетическая Компания', 'Сидор Энергетиков', '+79990000003', 'buyer2@energy.ru', 'BUYER'),
+--('supplier1', '$2a$10$xJwL5v5Jz5U6Z5b5Z5b5ZeXJwL5v5Jz5U6Z5b5Z5b5Ze', 'Шахта Угольная', 'Николай Поставщиков', '+79990000004', 'supplier1@coal.ru', 'SUPPLIER'),
+--('supplier2', '$2a$10$xJwL5v5Jz5U6Z5b5Z5b5ZeXJwL5v5Jz5U6Z5b5Z5b5Ze', 'Разрез Сибирский', 'Ольга Угольная', '+79990000005', 'supplier2@coal.ru', 'SUPPLIER');

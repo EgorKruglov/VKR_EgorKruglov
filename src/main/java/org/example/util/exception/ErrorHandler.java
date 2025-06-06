@@ -3,6 +3,7 @@ package org.example.util.exception;
 import lombok.extern.slf4j.Slf4j;
 import org.example.util.exception.extraExceptions.ConflictException;
 import org.example.util.exception.extraExceptions.NotFoundException;
+import org.example.util.exception.extraExceptions.UnauthorizedAccessException;
 import org.example.util.exception.extraExceptions.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -56,6 +57,13 @@ public class ErrorHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorResponse handleConflictException(final ConflictException e) {
+        log.debug(e.getMessage());
+        return new ErrorResponse(e.getMessage());
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ErrorResponse handleUnauthorizedAccessException(final UnauthorizedAccessException e) {
         log.debug(e.getMessage());
         return new ErrorResponse(e.getMessage());
     }

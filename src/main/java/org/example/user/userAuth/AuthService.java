@@ -32,7 +32,7 @@ public class AuthService {
 
         return new UserAuthResponse(
                 jwtToken,
-                user.getUsername()  // Я пока не понимаю, норм ли, что я отправляю почту? Можно ли её вместо id использовать? Мне кажется это вообще норм абсолютно.
+                user.getUsername()
         );
     }
 }
