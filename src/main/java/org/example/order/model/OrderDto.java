@@ -23,19 +23,19 @@ public class OrderDto {
     private Long userId;
 
     @NotBlank(message = "Delivery address is required")
-    @Size(max = 255)
+    @Size(max = 255, message = "Address must be less than 255 characters")
     private String deliveryAddress;
 
     @NotNull(message = "Delivery date is required")
-    @Future
+    @Future(message = "Delivery date must be in the future")
     private LocalDateTime deliveryDate;
 
     @NotNull(message = "Coal type is required")
     private CoalType coalType;
 
     @NotNull(message = "Quantity is required")
-    @Min(1)
-    @Max(10000)
+    @Min(value = 1, message = "Quantity must be at least 1 ton")
+    @Max(value = 10000, message = "Quantity must be less than 10000 tons")
     private Integer quantity;
 
     private OrderStatus status;

@@ -40,6 +40,10 @@ public class JwtService {
             Map<String, Object> extraClaims,
             UserDetails userDetails
     ) {
+        // Если userDetails является UserPrincipal, добавляем userId в claims
+        if (userDetails instanceof UserPrincipal) {
+            extraClaims.put("userId", ((UserPrincipal) userDetails).getId());
+        }
         return buildToken(extraClaims, userDetails, jwtExpiration);
     }
 
@@ -83,5 +87,10 @@ public class JwtService {
     private Key getSignInKey() {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
+    }
+
+    public Long extractUserId(String token) {
+        Claims claims = extractAllClaims(token);
+        return claims.get("userId", Long.class);
     }
 }

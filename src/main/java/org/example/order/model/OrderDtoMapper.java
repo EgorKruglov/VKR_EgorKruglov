@@ -17,6 +17,7 @@ public class OrderDtoMapper {
                 .coalType(orderDto.getCoalType())
                 .quantity(orderDto.getQuantity())
                 .status(orderDto.getStatus())
+                .comments(orderDto.getComments())
                 .createdAt(orderDto.getCreatedAt())
                 .updatedAt(orderDto.getUpdatedAt())
                 .build();
@@ -35,6 +36,7 @@ public class OrderDtoMapper {
                 .coalType(order.getCoalType())
                 .quantity(order.getQuantity())
                 .status(order.getStatus())
+                .comments(order.getComments())
                 .createdAt(order.getCreatedAt())
                 .updatedAt(order.getUpdatedAt())
                 .build();

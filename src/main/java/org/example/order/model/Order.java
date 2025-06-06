@@ -38,30 +38,24 @@ public class Order {
     @Column(name = "user_id", nullable = false)
     private Long userId;
 
-    @NotBlank(message = "Delivery address is required")
-    @Size(max = 255, message = "Address must be less than 255 characters")
     @Column(nullable = false)
     private String deliveryAddress;
 
-    @NotNull(message = "Delivery date is required")
-    @Future(message = "Delivery date must be in the future")
     @Column(nullable = false)
     private LocalDateTime deliveryDate;
 
-    @NotNull(message = "Coal type is required")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private CoalType coalType;
 
-    @NotNull(message = "Quantity is required")
-    @Min(value = 1, message = "Quantity must be at least 1 ton")
-    @Max(value = 10000, message = "Quantity must be less than 10000 tons")
     @Column(nullable = false)
     private Integer quantity; // in tons
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private OrderStatus status;
+
+    private String comments;
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;

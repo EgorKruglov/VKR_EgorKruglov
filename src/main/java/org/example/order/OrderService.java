@@ -62,6 +62,7 @@ public class OrderService {
         existingOrder.setQuantity(orderDto.getQuantity());
         existingOrder.setDeliveryAddress(orderDto.getDeliveryAddress());
         existingOrder.setDeliveryDate(orderDto.getDeliveryDate());
+        existingOrder.setComments(orderDto.getComments());
         existingOrder.setUpdatedAt(java.time.LocalDateTime.now());
 
         Order updatedOrder = orderRepository.save(existingOrder);

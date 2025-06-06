@@ -25,14 +25,12 @@ public class AuthService {
                 )
         );
 
-        UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
-        String jwtToken = jwtService.generateToken(userDetails);
-
-        User user = (User) authentication.getPrincipal();
+        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+        String jwtToken = jwtService.generateToken(userPrincipal);
 
         return new UserAuthResponse(
                 jwtToken,
-                user.getUsername()
+                userPrincipal.getEmail()
         );
     }
 }
