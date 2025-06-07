@@ -88,6 +88,7 @@ export default function App() {
         />
         <Routes>
           <Route path="/" element={<Main />} />
+          {/* <Route path="/2" element={<MaybeNewMain2 />} /> */}
           <Route path="/about" element={<Company />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/products" element={<Products />} />
