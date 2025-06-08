@@ -44,9 +44,8 @@ public class Order {
     @Column(nullable = false)
     private LocalDateTime deliveryDate;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private CoalType coalType;
+    private String coalType;
 
     @Column(nullable = false)
     private Integer quantity; // in tons

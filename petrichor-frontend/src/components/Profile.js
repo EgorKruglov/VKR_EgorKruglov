@@ -8,9 +8,7 @@ export default function Profile() {
   const handleLogout = () => {
     // Удаляем токен из localStorage
     localStorage.removeItem('authToken');
-    // Перенаправляем на главную страницу
     navigate('/');
-    // Для полного обновления состояния (можно заменить на более сложную логику)
     window.location.reload();
   };
 

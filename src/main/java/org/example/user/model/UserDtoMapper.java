@@ -49,6 +49,7 @@ public class UserDtoMapper {
                 .contactPhone(user.getContactPhone())
                 .contactEmail(user.getContactEmail())
                 .industry(user.getIndustry())
+                .roles(user.getRoles())
                 .build();
     }
 }

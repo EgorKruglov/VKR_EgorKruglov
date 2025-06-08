@@ -30,8 +30,8 @@ public class OrderDto {
     @Future(message = "Delivery date must be in the future")
     private LocalDateTime deliveryDate;
 
-    @NotNull(message = "Coal type is required")
-    private CoalType coalType;
+    @NotBlank(message = "Coal type is required")
+    private String coalType;
 
     @NotNull(message = "Quantity is required")
     @Min(value = 1, message = "Quantity must be at least 1 ton")

@@ -11,8 +11,6 @@ import Orders from './Orders';
 import Profile from './Profile';
 import Notification from './Notification';
 import NewOrder from './NewOrder';
-// import MaybeNewMain from './MaybeNewMain';
-// import MaybeNewMain2 from './MaybeNewMain2';
 
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
@@ -88,7 +86,6 @@ export default function App() {
         />
         <Routes>
           <Route path="/" element={<Main />} />
-          {/* <Route path="/2" element={<MaybeNewMain2 />} /> */}
           <Route path="/about" element={<Company />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/products" element={<Products />} />

@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 public class UserController {
     private final UserService userService;
-    private final AuthService authService; // мб стоит проверку к бд сделать в userService.
+    private final AuthService authService;
 
     @PostMapping("/auth/register")
     public ResponseEntity<Object> registerUser(@Validated({Create.class}) @RequestBody UserDto user) {

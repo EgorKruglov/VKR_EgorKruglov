@@ -12,6 +12,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -101,9 +102,10 @@ public class UserDto {
     @Email(message = "Contact email should be valid", groups = {Create.class, Update.class})
     private String contactEmail;
 
-    // Дополнительно
     @Size(max = 255, message = "Industry name is too long", groups = {Create.class, Update.class})
     private String industry;
+
+    private List<String> roles;
 
     private LocalDateTime createdAt;
 

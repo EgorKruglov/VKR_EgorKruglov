@@ -60,7 +60,6 @@ public class User {
     private String contactPhone;
     private String contactEmail;
 
-    // Дополнительно
     private String industry;
 
     @ElementCollection(fetch = FetchType.EAGER)
