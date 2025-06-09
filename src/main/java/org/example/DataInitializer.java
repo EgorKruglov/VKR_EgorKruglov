@@ -19,13 +19,13 @@ public class DataInitializer {  // вот этот класс нельзя от�
 
     @PostConstruct
     public void init() {
-        if (userRepository.findByEmail("admin1@example.com").isEmpty()) {  // Создание администратора
+        /*if (userRepository.findByEmail("admin1@example.com").isEmpty()) {  // Создание администратора
             User user = new User();
             user.setEmail("admin1@example.com");
             user.setPassword(passwordEncoder.encode("admin1Password"));
             user.setRoles(List.of("ROLE_ADMIN"));
             userRepository.save(user);
-        }
+        }*/
         /*if (userRepository.findByEmail("test@example2.com").isEmpty()) {
             User user = new User();
             user.setEmail("test2@example.com");

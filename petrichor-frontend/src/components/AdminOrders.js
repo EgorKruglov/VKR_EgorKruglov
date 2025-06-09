@@ -88,7 +88,11 @@ const AdminOrders = () => {
 
     useEffect(() => {
         fetchOrdersByPeriod();
-    }, [period, customStart, customEnd]);
+    }, []);
+
+    const handlePeriodChange = (e) => {
+        setPeriod(e.target.value);
+    };
 
     const handleStatusChange = async (orderId, newStatus) => {
         try {
@@ -164,7 +168,7 @@ const AdminOrders = () => {
                     <select
                         id="period-filter"
                         value={period}
-                        onChange={(e) => setPeriod(e.target.value)}
+                        onChange={handlePeriodChange}
                     >
                         <option value="day">За день</option>
                         <option value="week">За неделю</option>

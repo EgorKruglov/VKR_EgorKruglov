@@ -35,11 +35,12 @@ public class AdminOrderController {
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
         log.info("GET admin запрос на получение заявок пользователей");
+        System.out.println(start + " ++++++++++++++++" + end);
         if (start.isAfter(end)) {
             return ResponseEntity.badRequest().build();
         }
 
-        List<FullOrderDto> orders = orderService.getOrders(start.plusHours(3), end.plusHours(3));
+        List<FullOrderDto> orders = orderService.getOrders(start, end);
         return ResponseEntity.ok(orders);
     }
 
