@@ -19,7 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -32,15 +33,17 @@ public class AdminOrderController {
 
     @GetMapping
     public ResponseEntity<List<FullOrderDto>> getOrdersByPeriod(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
-        log.info("GET admin запрос на получение заявок пользователей");
-        System.out.println(start + " ++++++++++++++++" + end);
-        if (start.isAfter(end)) {
-            return ResponseEntity.badRequest().build();
-        }
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime start,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime end) {
+        // Конвертируем в московское время
+        ZoneId moscowZone = ZoneId.of("Europe/Moscow");
+        ZonedDateTime startMoscow = start.withZoneSameInstant(moscowZone);
+        ZonedDateTime endMoscow = end.withZoneSameInstant(moscowZone);
 
-        List<FullOrderDto> orders = orderService.getOrders(start, end);
+        List<FullOrderDto> orders = orderService.getOrders(
+                startMoscow.toLocalDateTime(),
+                endMoscow.toLocalDateTime()
+        );
         return ResponseEntity.ok(orders);
     }
 

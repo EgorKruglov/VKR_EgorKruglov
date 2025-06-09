@@ -106,7 +106,7 @@ const UserRegistration = () => {
                 <form onSubmit={handleSubmit}>
                     {/* Личные данные */}
                     <h3>Данные для регистрации</h3>
-                    <div className="form-group">
+                    <div className="registration-form-group">
                         <label htmlFor="email">Электронная почта:</label>
                         <input
                             type="email"
@@ -118,7 +118,7 @@ const UserRegistration = () => {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className="registration-form-group">
                         <label htmlFor="phone">Телефон:</label>
                         <input
                             type="tel"
@@ -130,7 +130,7 @@ const UserRegistration = () => {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className="registration-form-group">
                         <label htmlFor="password">Пароль:</label>
                         <input
                             type="password"
@@ -142,7 +142,7 @@ const UserRegistration = () => {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className="registration-form-group">
                         <label htmlFor="confirmPassword">Подтвердите пароль:</label>
                         <input
                             type="password"
@@ -156,7 +156,7 @@ const UserRegistration = () => {
 
                     {/* Данные компании */}
                     <h3>Данные компании</h3>
-                    <div className="form-group">
+                    <div className="registration-form-group">
                         <label htmlFor="companyName">Название компании (полное):</label>
                         <input
                             type="text"
@@ -168,7 +168,7 @@ const UserRegistration = () => {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className="registration-form-group">
                         <label htmlFor="companyShortName">Краткое название:</label>
                         <input
                             type="text"
@@ -179,7 +179,7 @@ const UserRegistration = () => {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className="registration-form-group">
                         <label htmlFor="inn">ИНН:</label>
                         <input
                             type="text"
@@ -191,7 +191,7 @@ const UserRegistration = () => {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className="registration-form-group">
                         <label htmlFor="kpp">КПП:</label>
                         <input
                             type="text"
@@ -203,7 +203,7 @@ const UserRegistration = () => {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className="registration-form-group">
                         <label htmlFor="ogrn">ОГРН/ОГРНИП:</label>
                         <input
                             type="text"
@@ -215,7 +215,7 @@ const UserRegistration = () => {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className="registration-form-group">
                         <label htmlFor="legalAddress">Юридический адрес:</label>
                         <input
                             type="text"
@@ -227,7 +227,7 @@ const UserRegistration = () => {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className="registration-form-group">
                         <label htmlFor="actualAddress">Фактический адрес:</label>
                         <input
                             type="text"
@@ -240,7 +240,7 @@ const UserRegistration = () => {
 
                     {/* Банковские реквизиты */}
                     <h3>Банковские реквизиты</h3>
-                    <div className="form-group">
+                    <div className="registration-form-group">
                         <label htmlFor="bankAccount">Расчетный счет:</label>
                         <input
                             type="text"
@@ -252,7 +252,7 @@ const UserRegistration = () => {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className="registration-form-group">
                         <label htmlFor="bik">БИК:</label>
                         <input
                             type="text"
@@ -264,7 +264,7 @@ const UserRegistration = () => {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className="registration-form-group">
                         <label htmlFor="bankName">Название банка:</label>
                         <input
                             type="text"
@@ -276,7 +276,7 @@ const UserRegistration = () => {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className="registration-form-group">
                         <label htmlFor="correspondentAccount">Корреспондентский счет:</label>
                         <input
                             type="text"
@@ -290,7 +290,7 @@ const UserRegistration = () => {
 
                     {/* Контактные лица */}
                     <h3>Контактные лица</h3>
-                    <div className="form-group">
+                    <div className="registration-form-group">
                         <label htmlFor="contactPerson">Контактное лицо:</label>
                         <input
                             type="text"
@@ -302,7 +302,7 @@ const UserRegistration = () => {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className="registration-form-group">
                         <label htmlFor="contactPersonPosition">Должность:</label>
                         <input
                             type="text"
@@ -313,7 +313,7 @@ const UserRegistration = () => {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className="registration-form-group">
                         <label htmlFor="contactPhone">Телефон для связи:</label>
                         <input
                             type="tel"
@@ -325,7 +325,7 @@ const UserRegistration = () => {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className="registration-form-group">
                         <label htmlFor="contactEmail">Email для документооборота:</label>
                         <input
                             type="email"
@@ -339,7 +339,7 @@ const UserRegistration = () => {
 
                     {/* Дополнительно */}
                     <h3>Дополнительная информация</h3>
-                    <div className="form-group">
+                    <div className="registration-form-group">
                         <label htmlFor="industry">Сфера деятельности:</label>
                         <input
                             type="text"
@@ -351,7 +351,7 @@ const UserRegistration = () => {
                     </div>
 
                     {/* Согласия */}
-                    <div className="form-group checkbox-group">
+                    <div className="registration-form-group checkbox-group">
                         <input
                             type="checkbox"
                             id="agreeToTerms"
@@ -363,7 +363,7 @@ const UserRegistration = () => {
                         <label htmlFor="agreeToTerms">Я согласен на обработку персональных данных</label>
                     </div>
 
-                    <div className="form-actions">
+                    <div className="registration-form-actions">
                         <button
                             type="submit"
                             className="submit-btn"

@@ -1,12 +1,13 @@
 package org.example.user;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.user.model.User;
 import org.example.user.model.UserDto;
 import org.example.user.model.UserDtoMapper;
-import org.example.user.userAuth.authModel.UserAuthRequest;
-import org.example.user.userAuth.authModel.UserAuthResponse;
+import org.example.user.userAuth.SecurityUtils;
 import org.example.util.exception.extraExceptions.ConflictException;
+import org.example.util.exception.extraExceptions.NotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,14 +17,11 @@ import java.util.List;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+    private final SecurityUtils securityUtils;
 
     @Transactional
     public UserDto add(UserDto user) {
@@ -54,9 +52,11 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public UserAuthResponse auth(UserAuthRequest userAuth) {
-        // Добавить исключение, если не найден. Или переделать то, которое сейчас есть. Проблема в том, что данные у меня хранятся не закодированные.
-        return null;
+    public Object getUser() {
+        Long id = securityUtils.getCurrentUserId();
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("User not found with id: " + id));
+        return UserDtoMapper.userToDto(user);
     }
 
 /*    @Transactional

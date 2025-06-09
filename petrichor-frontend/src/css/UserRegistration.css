@@ -19,7 +19,7 @@
 .registration-section:hover {
     transform: translateY(-2px);
 }
-
+form
 .registration-section h2 {
     border-bottom: 2px solid #444;
     padding-bottom: 8px;
@@ -29,18 +29,18 @@
     text-align: center;
 }
 
-.form-group {
+.registration-form-group {
     margin-bottom: 20px;
 }
 
-.form-group label {
+.registration-form-group label {
     display: block;
     margin-bottom: 8px;
     font-weight: 600;
     color: #444;
 }
 
-.form-group input {
+.registration-form-group input {
     width: 96.5%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -49,12 +49,12 @@
     transition: border-color 0.3s;
 }
 
-.form-group input:focus {
+.registration-form-group input:focus {
     border-color: #555;
     outline: none;
 }
 
-.form-actions {
+.registration-form-actions {
     display: flex;
     justify-content: space-between;
     margin-top: 30px;

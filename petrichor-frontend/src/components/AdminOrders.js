@@ -28,6 +28,8 @@ const AdminOrders = () => {
         switch (period) {
             case 'day':
                 start.setDate(now.getDate() - 1);
+                console.log(start)
+                console.log(now)
                 break;
             case 'week':
                 start.setDate(now.getDate() - 7);
@@ -51,8 +53,8 @@ const AdminOrders = () => {
         }
 
         return {
-            start: start.toISOString().slice(0, -1),
-            end: now.toISOString().slice(0, -1)
+            start: start.toISOString(),
+            end: now.toISOString()
         };
     };
 
