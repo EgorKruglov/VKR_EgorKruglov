@@ -11,6 +11,7 @@ import Orders from './Orders';
 import Profile from './Profile';
 import Notification from './Notification';
 import NewOrder from './NewOrder';
+import AdminOrders from './AdminOrders';
 
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
@@ -26,16 +27,19 @@ function Header() {
   );
 }
 
-function Nav({ onLoginClick, isAuthenticated }) {
+function Nav({ onLoginClick, isAuthenticated, userRole }) {
   return (
     <nav className="nav">
       <Link to="/">Главная</Link>
       <Link to="/about">О компании</Link>
-      <Link to="/products">Продукция</Link>
       <Link to="/contacts">Контакты</Link>
+      <Link to="/products">Продукция</Link>
       {isAuthenticated ? (
         <>
           <Link to="/orders" className="nav-link">Мои заказы</Link>
+          {userRole === '[ROLE_ADMIN]' && (
+            <Link to="/adminorders" className="nav-link">Администрирование</Link>
+          )}
           <Link to="/profile" className="nav-link">Профиль</Link>
         </>
       ) : (
@@ -56,16 +60,21 @@ function Footer() {
 export default function App() {
   const [isLoginOpen, setLoginOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userRole, setUserRole] = useState(null);
   const [notification, setNotification] = useState(null);
 
   // Проверяем авторизацию при загрузке
   useEffect(() => {
     const token = localStorage.getItem('authToken');
+    const role = localStorage.getItem('userRole');
     setIsAuthenticated(!!token);
+    setUserRole(role);
   }, []);
 
   const handleLoginSuccess = () => {
+    const role = localStorage.getItem('userRole');
     setIsAuthenticated(true);
+    setUserRole(role);
     setNotification('Добро пожаловать!');
     setTimeout(() => setNotification(null), 3000);
   };
@@ -73,7 +82,9 @@ export default function App() {
   // Функция для обработки выхода
   const handleLogout = () => {
     localStorage.removeItem('authToken');
+    localStorage.removeItem('userRole');
     setIsAuthenticated(false);
+    setUserRole(null);
   };
 
   return (
@@ -83,6 +94,7 @@ export default function App() {
         <Nav 
           onLoginClick={() => setLoginOpen(true)} 
           isAuthenticated={isAuthenticated} 
+          userRole={userRole}
         />
         <Routes>
           <Route path="/" element={<Main />} />
@@ -92,6 +104,7 @@ export default function App() {
           <Route path="/registration" element={<UserRegistration />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/new-order" element={<NewOrder />} />
+          <Route path="/adminorders" element={<AdminOrders />} />
           <Route 
             path="/profile" 
             element={<Profile onLogout={handleLogout} />} 

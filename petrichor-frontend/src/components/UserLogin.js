@@ -86,9 +86,9 @@ export default function LoginPopup({ isOpen, onClose, onLoginSuccess }) {
         try {
             const response = await axios.post('http://localhost:8080/users/auth/login', formData);
             console.log(response.data);
-            const { token, email } = response.data;
+            const { token, role } = response.data;
             localStorage.setItem('authToken', token);
-            localStorage.setItem('email', email)
+            localStorage.setItem('userRole', role);
             onLoginSuccess();
             onClose();
         } catch (err) {

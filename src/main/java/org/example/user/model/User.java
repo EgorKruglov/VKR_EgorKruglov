@@ -36,7 +36,7 @@ public class User {
     private String email;
     private String phone;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String password;
 
     // Данные компании
@@ -83,7 +83,7 @@ public class User {
 
     public List<String> getRoles() {
         if (roles == null || roles.isEmpty()) {
-            return List.of("USER"); // Дефолтная роль для всех
+            return List.of("ROLE_USER"); // Дефолтная роль для всех
         }
         return roles;
     }

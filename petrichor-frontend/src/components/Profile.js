@@ -8,6 +8,7 @@ export default function Profile() {
   const handleLogout = () => {
     // Удаляем токен из localStorage
     localStorage.removeItem('authToken');
+    localStorage.removeItem('userRole');
     navigate('/');
     window.location.reload();
   };

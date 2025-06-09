@@ -50,35 +50,6 @@ public class OrderService {
         return OrderDtoMapper.orderToDto(order);
     }
 
-    @Transactional
-    public OrderDto updateOrder(Long id, OrderDto orderDto) {
-        Order existingOrder = orderRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Заказ не найден id: " + id));
-
-        checkOrderOwnership(existingOrder);
-
-        // Обновляем только изменяемые поля
-        existingOrder.setCoalType(orderDto.getCoalType());
-        existingOrder.setQuantity(orderDto.getQuantity());
-        existingOrder.setDeliveryAddress(orderDto.getDeliveryAddress());
-        existingOrder.setDeliveryDate(orderDto.getDeliveryDate());
-        existingOrder.setComments(orderDto.getComments());
-        existingOrder.setUpdatedAt(java.time.LocalDateTime.now());
-
-        Order updatedOrder = orderRepository.save(existingOrder);
-        return OrderDtoMapper.orderToDto(updatedOrder);
-    }
-
-    @Transactional
-    public void deleteOrder(Long id) {
-        Order order = orderRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Заказ не найден id: " + id));
-
-        checkOrderOwnership(order);
-
-        orderRepository.delete(order);
-    }
-
     private void checkOrderOwnership(Order order) {
         Long currentUserId = securityUtils.getCurrentUserId();
         if (!order.getUserId().equals(currentUserId)) {

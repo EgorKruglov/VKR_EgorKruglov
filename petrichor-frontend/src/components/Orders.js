@@ -69,7 +69,7 @@ const Orders = () => {
 
     return (
         <div className="orders-page">
-            <h1>Мои заказы</h1>
+            <h2>Мои заказы</h2>
             <p className="page-description">Здесь вы можете просматривать статус своих заявок на уголь</p>
             
             <section className="orders-section">
