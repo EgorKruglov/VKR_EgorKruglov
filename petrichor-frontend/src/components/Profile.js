@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/Profile.css';
 
-const Profile = () => {
+const Profile = ({ onLogout }) => {
   const [userData, setUserData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({});
@@ -77,10 +77,8 @@ const Profile = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('userRole');
+    onLogout();
     navigate('/');
-    window.location.reload();
   };
 
   if (isLoading) {

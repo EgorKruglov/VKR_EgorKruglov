@@ -12,6 +12,7 @@ import Profile from './Profile';
 import Notification from './Notification';
 import NewOrder from './NewOrder';
 import AdminOrders from './AdminOrders';
+import Logout from './Logout';
 
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
@@ -85,6 +86,8 @@ export default function App() {
     localStorage.removeItem('userRole');
     setIsAuthenticated(false);
     setUserRole(null);
+    setNotification('Вы успешно вышли из аккаунта');
+    setTimeout(() => setNotification(null), 3000);
   };
 
   return (
@@ -109,6 +112,7 @@ export default function App() {
             path="/profile" 
             element={<Profile onLogout={handleLogout} />} 
           />
+          <Route path="/logout" element={<Logout />} />
         </Routes>
         <Footer />
         <UserLogin 

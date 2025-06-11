@@ -28,8 +28,6 @@ const AdminOrders = () => {
         switch (period) {
             case 'day':
                 start.setDate(now.getDate() - 1);
-                console.log(start)
-                console.log(now)
                 break;
             case 'week':
                 start.setDate(now.getDate() - 7);
