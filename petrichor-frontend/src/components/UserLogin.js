@@ -91,6 +91,7 @@ export default function LoginPopup({ isOpen, onClose, onLoginSuccess }) {
             localStorage.setItem('userRole', role);
             onLoginSuccess();
             onClose();
+            navigate('/');
         } catch (err) {
             setErrors(prev => ({
                 ...prev,

@@ -1,5 +1,4 @@
 .registration-container {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #222;
     margin: 0;
     background-color: #f4f4f4;
@@ -16,9 +15,6 @@
     transition: transform 0.2s ease;
 }
 
-.registration-section:hover {
-    transform: translateY(-2px);
-}
 form
 .registration-section h2 {
     border-bottom: 2px solid #444;
@@ -42,7 +38,7 @@ form
 
 .registration-form-group input {
     width: 96.5%;
-    padding: 10px;
+    padding: 9px;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 16px;
@@ -61,7 +57,7 @@ form
 }
 
 .submit-btn {
-    background-color: #357ac8;
+    background-color: #3498db;
     color: white;
     border: none;
     padding: 12px 25px;
@@ -72,7 +68,7 @@ form
 }
 
 .submit-btn:hover {
-    background-color: #1a252f;
+    background-color: #2980b9;
 }
 
 .cancel-btn {

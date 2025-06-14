@@ -9,18 +9,11 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   z-index: 1000;
   animation: slideIn 0.3s ease-out, fadeOut 0.3s ease-out 2.7s;
-  border-left: 4px solid #4CAF50;
+  border-left: 4px solid #3498db;
   font-family: inherit;
   font-size: 0.95em;
   display: flex;
   align-items: center;
-}
-
-.notification::before {
-  content: "✓";
-  margin-right: 10px;
-  color: #4CAF50;
-  font-weight: bold;
 }
 
 @keyframes slideIn {
