@@ -35,6 +35,7 @@ public class AdminOrderController {
     public ResponseEntity<List<FullOrderDto>> getOrdersByPeriod(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime start,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) ZonedDateTime end) {
+        log.info("GET admin запрос на получение заявок за период: {}", start.toString() + " " + end.toString());
         // Конвертируем в московское время
         ZoneId moscowZone = ZoneId.of("Europe/Moscow");
         ZonedDateTime startMoscow = start.withZoneSameInstant(moscowZone);
