@@ -20,7 +20,9 @@ function Header() {
   return (
     <header className="header">
       <div className="branding">
-        <img src={logo} alt="Petrichor Logo" className="logo" />
+        <Link to="/">
+          <img src={logo} alt="Petrichor Logo" className="logo" />
+        </Link>
         <h1>АО «Petrichor»</h1>
       </div>
       <p className="tagline">Надёжный поставщик угля по всей России и СНГ</p>

@@ -35,7 +35,7 @@ public class OrderDto {
 
     @NotNull(message = "Quantity is required")
     @Min(value = 1, message = "Quantity must be at least 1 ton")
-    @Max(value = 10000, message = "Quantity must be less than 10000 tons")
+    @Max(value = 1000000, message = "Quantity must be less than 1000000 tons")
     private Integer quantity;
 
     private OrderStatus status;
